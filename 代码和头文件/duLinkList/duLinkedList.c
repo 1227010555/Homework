@@ -48,8 +48,10 @@ void *InsertBeforeList_DuL(DuLNode *p, DuLNode *q) {
 	int node,n=0;
 	head=p;
 	//第一步：判断链表是否存在或链表仅有头结点
-	if(ExistLinkedList==0)
+	if(head==NULL) {
+		printf("链表不存在\n");
 		return;
+	}
 	if(head->next==NULL) {
 		printf("该链表仅有头结点，请在结点后面插入\n");
 		return head;
@@ -64,11 +66,11 @@ void *InsertBeforeList_DuL(DuLNode *p, DuLNode *q) {
 	do {
 		printf("插入第几个结点之前:\n");
 		scanf("%d",&n);
-		if(n>node||n==1)
+		if(n>node)
 			printf("你输入的数据有误\n");
-	} while(n>node||n==1);
+	} while(n>node);
 	//第四步：插入
-	for(n; n>1; n--)
+	for(n; n>0; n--)
 		p=p->next;
 	pPrior=p->prior;
 	pPrior->next=q;
@@ -91,8 +93,10 @@ void *InsertAfterList_DuL(DuLNode *p, DuLNode *q) {
 	int node,n=0;
 	head=p;
 	//第一步：判断链表是否存在
-	if(ExistLinkedList==0)
+	if(head==NULL) {
+		printf("链表不存在\n");
 		return;
+	}
 	//第二步：数结点
 	node=CountNode(head);
 	printf("该链表有%d个结点\n",node);
@@ -100,6 +104,13 @@ void *InsertAfterList_DuL(DuLNode *p, DuLNode *q) {
 	q=(DuLNode* )malloc(sizeof(DuLNode));
 	printf("输入插入的数据:\n");
 	scanf("%d",&q->data);
+		if(head->next==NULL) {
+		head->next=q;
+		q->next=NULL;
+		q->prior=head;
+		TraverseList_DuL(head);
+		return head;
+	}
 	do {
 		printf("插入第几个结点之后:\n");
 		scanf("%d",&n);
@@ -107,7 +118,7 @@ void *InsertAfterList_DuL(DuLNode *p, DuLNode *q) {
 			printf("你输入的数据有误\n");
 	} while(n>node);
 	//第四步：插入
-	for(n; n>1; n--)
+	for(n; n>0; n--)
 		p=p->next;
 	if(p->next==NULL) {
 		p->next=q;
@@ -135,7 +146,7 @@ void *DeleteList_DuL(DuLNode *p, ElemType e) {
 	DuLNode *head,*pNext;
 	head=p;
 	//第一步：判断链表是否存在
-	if(ExistLinkedList==0)
+	if(ExistLinkedList(head)==0)
 		return;
 	//第二步：输入删除的数据
 	printf("输入删除的数据:\n");
@@ -169,14 +180,11 @@ void *DeleteList_DuL(DuLNode *p, ElemType e) {
 void TraverseList_DuL(DuLinkedList L) {
 	int node=0;
 	//第一步：判断链表是否存在
-	if(ExistLinkedList==0)
+	if(ExistLinkedList(L)==0)
 		return;
 	//第二步：遍历链表（包括头结点）
+			L = L->next;
 	while(L!=NULL) {
-		if(node==0) {
-			printf("头结点数据：%d\n",L->data);
-			node++;
-		} else
 			printf("第%d个结点数据：%d\n",++node,L->data);
 		L = L->next;
 	}
@@ -191,7 +199,7 @@ void TraverseList_DuL(DuLinkedList L) {
  */
 int CountNode(DuLNode *head) {
 	int node=0;
-	while(head!=NULL) {
+	while(head->next!=NULL) {
 		node++;
 		head=head->next;
 	}
@@ -206,7 +214,7 @@ int CountNode(DuLNode *head) {
  *  @notice      : None
  */
 DuLNode *ExistLinkedList(DuLNode *head) {
-	if(head==NULL) {
+	if(head==NULL||head->next==NULL) {
 		printf("链表不存在\n");
 		return 0;
 	}
