@@ -14,6 +14,7 @@
  /**************************************************************
 *	Multi-Include-Prevent Section
 **************************************************************/
+
 #ifndef LINKEDLIST_H_INCLUDED
 #define LINKEDLIST_H_INCLUDED
 
@@ -50,7 +51,7 @@ typedef enum Status {
 **************************************************************/
 
 /**
- *  @name        : void *InitList(LinkList *L);
+ *  @name        : void *InitList(LinkList L);
  *	@description : initialize an empty linked list with only the head node without value
  *	@param		 : L(the head node)
  *	@return		 : LNode
@@ -59,7 +60,7 @@ typedef enum Status {
 void *InitList(LinkedList L);
 
 /**
- *  @name        : void *DestroyList(LinkedList *L)
+ *  @name        : void *DestroyList(LinkedList L)
  *	@description : destroy a linked list, free all the nodes
  *	@param		 : L(the head node)
  *	@return		 : LNode
@@ -77,18 +78,18 @@ void *DestroyList(LinkedList L);
 void *InsertList(LNode *p, LNode *q);
 
 /**
- *  @name        : void *DeleteList(LNode *p, ElemType *e)
+ *  @name        : void *DeleteList(LNode *p, ElemType e)
  *	@description : delete the first node after the node p and assign its value to e
  *	@param		 : p, e
  *	@return		 : LNode
  *  @notice      : None
  */
-void *DeleteList(LNode *p, ElemType *e);
+void *DeleteList(LNode *p, ElemType e);
  
  /**
  *  @name        : void TraverseList(LinkedList L)
  *	@description : traverse the linked list and call the funtion visit
- *	@param		 : L(the head node), visit
+ *	@param		 : L(the head node)
  *	@return		 : None
  *  @notice      : None
  */
@@ -101,10 +102,10 @@ void TraverseList(LinkedList L);
  *	@return		 : Status
  *  @notice      : None
  */
-Status SearchList(LinkedList L, ElemType *e);
+Status SearchList(LinkedList L, ElemType e);
 
  /**
- *  @name        : void *ReverseList(LinkedList *L)
+ *  @name        : void *ReverseList(LinkedList L)
  *	@description : reverse the linked list
  *	@param		 : L(the head node)
  *	@return		 : LNode
@@ -131,7 +132,7 @@ Status IsLoopList(LinkedList L);
 LNode *ReverseEvenList(LinkedList L);
 
 /**
- *  @name        : LNode* FindMidNode(LinkedList *L)
+ *  @name        : LNode *FindMidNode(LinkedList L)
  *	@description : find the middle node in the linked list
  *	@param		 : L(the head node)
  *	@return		 : LNode

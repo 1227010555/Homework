@@ -1,7 +1,7 @@
 #include "linkedList.h"
 
 /**
- *  @name        : void *InitList(LinkList *L);
+ *  @name        : void *InitList(LinkList L);
  *	@description : initialize an empty linked list with only the head node without value
  *	@param		 : L(the head node)
  *	@return		 : LNode
@@ -15,7 +15,7 @@ void *InitList(LinkedList L) {
 }
 
 /**
- *  @name        : void *DestroyList(LinkedList *L)
+ *  @name        : void *DestroyList(LinkedList L)
  *	@description : destroy a linked list, free all the nodes
  *	@param		 : L(the head node)
  *	@return		 : LNode
@@ -77,16 +77,16 @@ void *InsertList(LNode *p, LNode *q) {
 }
 
 /**
- *  @name        : void *DeleteList(LNode *p, ElemType *e)
+ *  @name        : void *DeleteList(LNode *p, ElemType e)
  *	@description : delete the first node after the node p and assign its value to e
  *	@param		 : p, e
  *	@return		 : LNode
  *  @notice      : None
  */
-void *DeleteList(LNode *p, ElemType *e) {
-	ElemType  data;
-	LNode *head;
+void *DeleteList(LNode *p, ElemType e) {
+	LNode *head,*pNext;
 	head=p;
+	pNext=p->next;
 	//第一步：判断链表是否存在
 	if(ExistLinkedList==0)
 		return;
@@ -94,17 +94,21 @@ void *DeleteList(LNode *p, ElemType *e) {
 	printf("输入删除的数据:\n");
 	scanf("%d",&e);
 	//第三步：删除
-	while(p->next->data!=data) {
+	while(pNext->data!=e) {
+		pNext=pNext->next;
 		p=p->next;
-		if(p->next==NULL) {
+		if(pNext==NULL) {
 			printf("找不到需要删除的结点\n");
 			return head;
 		}
 	}
-	if(p->next->next==NULL)
+	if(pNext->next==NULL)
 		p->next=NULL;
 	else
-		p->next=p->next->next;
+	{
+		pNext=pNext->next;
+		p->next=pNext;
+	}
 	TraverseList(head);
 	return head;
 }
@@ -139,20 +143,19 @@ void TraverseList(LinkedList L) {
  *	@return		 : Status
  *  @notice      : None
  */
-Status SearchList(LinkedList L, ElemType *e) {
-	ElemType  data;
+Status SearchList(LinkedList L, ElemType e) {
 	int node=1;
 	//第一步：判断链表是否存在
 	if(ExistLinkedList==0)
 		return;
 	//第二步：输入查找的数据
 	printf("输入查找的数据:\n");
-	scanf("%d",&data);
+	scanf("%d",&e);
 	//第三步：删除
-	while(L->data!=data) {
+	while(L->data!=e) {
 		L=L->next;
 		node++;
-		if(L->next==NULL) {
+		if(L==NULL) {
 			printf("找不到需要查找的结点\n");
 			return;
 		}
@@ -161,7 +164,7 @@ Status SearchList(LinkedList L, ElemType *e) {
 }
 
 /**
- *  @name        : Status ReverseList(LinkedList *L)
+ *  @name        : Status ReverseList(LinkedList L)
  *	@description : reverse the linked list
  *	@param		 : L(the head node)
  *	@return		 : LNode
@@ -290,7 +293,7 @@ LNode *ReverseEvenList(LinkedList L) {
 }
 
 /**
- *  @name        : LNode* FindMidNode(LinkedList *L)
+ *  @name        : LNode *FindMidNode(LinkedList L)
  *	@description : find the middle node in the linked list
  *	@param		 : L(the head node)
  *	@return		 : LNode

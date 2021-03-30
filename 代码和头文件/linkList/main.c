@@ -24,13 +24,13 @@ int main() {
 				head=InsertList(head,NULL);
 				break;
 			case'4':
-				head=DeleteList(head,NULL);
+				head=DeleteList(head,0);
 				break;
 			case'5': 
 				TraverseList(head);
 				break;
 			case'6':
-				SearchList(head,NULL);
+				SearchList(head,0);
 				break;
 			case'7':
 				head=ReverseList(head);
