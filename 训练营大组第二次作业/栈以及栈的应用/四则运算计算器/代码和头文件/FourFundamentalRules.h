@@ -5,9 +5,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <process.h>
 
 typedef struct {
-	int *data;
+	float *data;
 	int top;
 	int size;
 } DATA;

@@ -3,8 +3,8 @@
 int main() {
 	char a[SIZE] = {0};
 	int i = 0;
-	int temp = 0;
-	int j;
+	float temp = 0;
+	float j;
 
 	DATA num;
 	initStack(&num,0);
@@ -74,6 +74,6 @@ int main() {
 		}
 	}
 	printf("\n%s = %d\n",a,popStack(&num));
-
+	system("pause");
 	return 0;
 }
