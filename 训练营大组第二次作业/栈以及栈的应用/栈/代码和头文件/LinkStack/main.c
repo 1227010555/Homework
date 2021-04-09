@@ -42,6 +42,8 @@ int main() {
 			default:
 				printf("您输入的数据有误\n");
 		}
+		sleep(1);
+		system("cls");
 		getchar();
 	}
 }

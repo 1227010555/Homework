@@ -23,6 +23,11 @@ void *InitList(LinkedList L) {
  */
 void *DestroyList(LinkedList L) {
 	LinkedList p;
+	//第一步：判断链表是否存在
+	if(L==NULL) {
+		printf("链表不存在\n");
+		return;
+	}
 	p=L;
 	while(L!=NULL) {
 		p=L->next;
@@ -199,8 +204,8 @@ void *ReverseList(LinkedList L) {
 			top=top->next;
 		}
 		head->next=mid;
-			TraverseList(head);
-	return head;
+		TraverseList(head);
+		return head;
 	}
 }
 
@@ -249,10 +254,9 @@ LNode *ReverseEvenList(LinkedList L) {
 	int node=0,i;
 	LNode *mid,*back,*top,*head,*temp;
 	head=L;
-	temp=head->next->next;
 	//第一步：判断链表是否存在
 	if(ExistLinkedList(L)==0)
-		return;
+		return L;
 	//第二步：数结点
 	node=CountNode(L);
 	//第三步：根据结点奇偶分情况处理
@@ -262,6 +266,7 @@ LNode *ReverseEvenList(LinkedList L) {
 		TraverseList(head);
 		return head;
 	}
+	temp=head->next->next;
 	if(node%2==0) {
 		for(i=node; i>0; i-=2) {
 			if(i>3) {
@@ -313,12 +318,12 @@ LNode *ReverseEvenList(LinkedList L) {
 LNode *FindMidNode(LinkedList L) {
 	int node=0,i;
 	LNode *p;
-	p=L;
-	p=p->next;
 	//第一步：判断链表是否存在
 	if(ExistLinkedList(L)==0)
 		return;
 	//第二步：数结点
+	p=L;
+	p=p->next;
 	node=CountNode(L);
 	//第三步输出中点位置
 	if(node%2==0) {
@@ -356,8 +361,12 @@ int CountNode(LNode *head) {
  *  @notice      : None
  */
 LNode *ExistLinkedList(LNode *head) {
-	if(head==NULL||head->next==NULL) {
+	if(head==NULL) {
 		printf("链表不存在\n");
+		return 0;
+	}
+	if(head->next==NULL) {
+		printf("该链表只有头结点\n");
 		return 0;
 	}
 }

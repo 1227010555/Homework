@@ -1,27 +1,28 @@
 #include "LinkStack.h"
 
 void *initLStack(LinkStack *s) { //初始化栈
-	s=(LinkStackPtr)malloc (sizeof(StackNode));
+	s=(LinkStack *)malloc (sizeof(StackNode));
 	s->top=NULL;
 	s->count=0;
+	printf("初始化成功\n"); 
 	return s;
 }
 
 Status isEmptyLStack(LinkStack *s) { //判断栈是否为空或为空 
 	if(s==NULL) {
 		printf("链栈不存在\n");
-		return 0; 
+		return ERROR; 
 	}
 		if(s->count==0){
 		printf("链栈为空\n");
-		return 0;
+		return ERROR;
 	}
 	return;
 }
 
 Status getTopLStack(LinkStack *s,ElemType *e) { //得到栈顶元素
 	//第一步：判断链栈是否存在或为空 
-	if(isEmptyLStack(s)==0)
+	if(isEmptyLStack(s)==ERROR)
 		return;
 	//第二步：输出栈顶元素
 	printf("当前栈顶数据为:%d\n",s->top->data);
@@ -29,7 +30,7 @@ Status getTopLStack(LinkStack *s,ElemType *e) { //得到栈顶元素
 
 void *clearLStack(LinkStack *s) { //清空栈
 	//第一步：判断链栈是否存在或为空 
-	if(isEmptyLStack(s)==0)
+	if(isEmptyLStack(s)==ERROR)
 		return s;
 	//第二步：清空栈
 	LinkStackPtr stack;
@@ -63,7 +64,7 @@ void *destroyLStack(LinkStack *s) { //销毁栈
 
 Status LStackLength(LinkStack *s,int *length) { //检测栈长度
 	//第一步：判断链栈是否存在或为空 
-	if(isEmptyLStack(s)==0)
+	if(isEmptyLStack(s)==ERROR)
 		return;
 	//第二步：检测栈长度
 	printf("栈长度为:%d\n",s->count);
@@ -88,7 +89,7 @@ void *pushLStack(LinkStack *s,ElemType data) { //入栈
 
 void *popLStack(LinkStack *s,ElemType *data) { //出栈
 	//第一步：判断链栈是否存在或为空 
-	if(isEmptyLStack(s)==0)
+	if(isEmptyLStack(s)==ERROR)
 		return;
 	//第二步：出栈
 	if(s->top->next!=NULL) {

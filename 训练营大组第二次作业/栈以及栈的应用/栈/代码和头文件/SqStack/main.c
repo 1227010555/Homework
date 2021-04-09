@@ -2,9 +2,9 @@
 
 int main() {
 	int choice=0;
-    SqStack Sq;
-    SqStack *head=&Sq;
-    head->top=-1;
+	SqStack Sq;
+	SqStack *head=&Sq;
+	head->top=-1;
 	//用1使while死循环
 	while(1) {
 		printf("\n1.初始化栈\t\t2.判断栈是否为空\n");
@@ -44,6 +44,8 @@ int main() {
 			default:
 				printf("您输入的数据有误\n");
 		}
+		sleep(1);
+		system("cls");
 		getchar();
 	}
 }
