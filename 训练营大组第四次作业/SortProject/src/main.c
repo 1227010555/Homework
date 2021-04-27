@@ -47,6 +47,7 @@ int main() {
                 case 7:
                     return;
             }
+	printf("添加测试数据成功\n");
             sleep(1);
             system("cls");
             getchar();
