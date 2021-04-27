@@ -5,7 +5,7 @@ int main() {
 	LNode *head=NULL;
 	//用1使while死循环
 	while(1) {
-		printf("\n1.初始化链表\t\t2.释放链表\n");
+		printf("1.初始化链表\t\t2.释放链表\n");
 		printf("3.插入结点\t\t4.删除结点\n");
 		printf("5.遍历链表\t\t6.查找结点\n");
 		printf("7.反转链表\t\t8.链表是否成环\n");

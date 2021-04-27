@@ -8,10 +8,10 @@
  *  @notice      : None
  */
 void *InitList(LinkedList L) {
-	L=(LNode* )malloc(sizeof(LNode));
-	L->next=NULL;
-	printf("初始化链表成功\n");
-	return L;
+    L=(LNode* )malloc(sizeof(LNode));
+    L->next=NULL;
+    printf("初始化链表成功\n");
+    return L;
 }
 
 /**
@@ -22,21 +22,21 @@ void *InitList(LinkedList L) {
  *  @notice      : None
  */
 void *DestroyList(LinkedList L) {
-	LinkedList p;
-	//第一步：判断链表是否存在
-	if(L==NULL) {
-		printf("链表不存在\n");
-		return;
-	}
-	p=L;
-	while(L!=NULL) {
-		p=L->next;
-		free(L);
-		L=p;
-	}
-	L=NULL;
-	printf("释放链表成功\n");
-	return L;
+    LinkedList p;
+    //第一步：判断链表是否存在
+    if(L==NULL) {
+        printf("链表不存在\n");
+        return;
+    }
+    p=L;
+    while(L!=NULL) {
+        p=L->next;
+        free(L);
+        L=p;
+    }
+    L=NULL;
+    printf("释放链表成功\n");
+    return L;
 }
 
 /**
@@ -47,46 +47,47 @@ void *DestroyList(LinkedList L) {
  *  @notice      : None
  */
 void *InsertList(LNode *p, LNode *q) {
-	LNode *pNext,*head;
-	int node,n=0;
-	head=p;
-	//第一步：判断链表是否存在
-	if(head==NULL) {
-		printf("链表不存在\n");
-		return;
-	}
-	//第二步：数结点
-	node=CountNode(head);
-	printf("该链表有%d个结点\n",node);
-	//第三步：输入数据和插入到第几个结点并判断是否合法
-	q=(LNode* )malloc(sizeof(LNode));
-	printf("输入插入的数据:\n");
-	scanf("%d",&q->data);
-	if(head->next==NULL) {
-		head->next=q;
-		q->next=NULL;
-		TraverseList(head);
-		return head;
-	}
-	do {
-		printf("插入第几个结点之后:\n");
-		scanf("%d",&n);
-		if(n>node)
-			printf("你输入的数据有误\n");
-	} while(n>node);
-	//第四步：插入
-	for(n; n>0; n--)
-		p=p->next;
-	if(p->next==NULL) {
-		p->next=q;
-		q->next=NULL;
-	} else {
-		pNext=p->next;
-		p->next=q;
-		q->next=pNext;
-	}
-	TraverseList(head);
-	return head;
+    LNode *pNext,*head;
+    int node,n=0;
+    head=p;
+    //第一步：判断链表是否存在
+    if(head==NULL) {
+        printf("链表不存在\n");
+        return;
+    }
+    //第二步：数结点
+    node=CountNode(head);
+    printf("该链表有%d个结点\n",node);
+    //第三步：输入数据和插入到第几个结点并判断是否合法
+    q=(LNode* )malloc(sizeof(LNode));
+    printf("输入插入的数据:\n");
+    scanf("%d",&q->data);
+    if(head->next==NULL) {
+        head->next=q;
+        q->next=NULL;
+        TraverseList(head);
+        return head;
+    }
+    do {
+        printf("插入第几个结点之后:\n");
+        scanf("%d",&n);
+        if(n>node)
+            printf("你输入的数据有误\n");
+    } while(n>node);
+    //第四步：插入
+    for(n; n>0; n--)
+        p=p->next;
+    if(p->next==NULL) {
+        p->next=q;
+        q->next=NULL;
+    } else {
+        pNext=p->next;
+        p->next=q;
+        q->next=pNext;
+    }
+    TraverseList(head);
+    printf("插入成功\n");
+    return head;
 }
 
 /**
@@ -97,32 +98,33 @@ void *InsertList(LNode *p, LNode *q) {
  *  @notice      : None
  */
 void *DeleteList(LNode *p, ElemType e) {
-	LNode *head,*pNext;
-	head=p;
-	//第一步：判断链表是否存在
-	if(ExistLinkedList(head)==0)
-		return head;
-	//第二步：输入删除的数据
-	printf("输入删除的数据:\n");
-	scanf("%d",&e);
-	//第三步：删除
-	pNext=p->next;
-	while(pNext->data!=e) {
-		pNext=pNext->next;
-		p=p->next;
-		if(pNext==NULL) {
-			printf("找不到需要删除的结点\n");
-			return head;
-		}
-	}
-	if(pNext->next==NULL)
-		p->next=NULL;
-	else {
-		pNext=pNext->next;
-		p->next=pNext;
-	}
-	TraverseList(head);
-	return head;
+    LNode *head,*pNext;
+    head=p;
+    //第一步：判断链表是否存在
+    if(ExistLinkedList(head)==0)
+        return head;
+    //第二步：输入删除的数据
+    printf("输入删除的数据:\n");
+    scanf("%d",&e);
+    //第三步：删除
+    pNext=p->next;
+    while(pNext->data!=e) {
+        pNext=pNext->next;
+        p=p->next;
+        if(pNext==NULL) {
+            printf("找不到需要删除的结点\n");
+            return head;
+        }
+    }
+    if(pNext->next==NULL)
+        p->next=NULL;
+    else {
+        pNext=pNext->next;
+        p->next=pNext;
+    }
+    TraverseList(head);
+    printf("删除成功\n");
+    return head;
 }
 
 /**
@@ -133,16 +135,16 @@ void *DeleteList(LNode *p, ElemType e) {
  *  @notice      : None
  */
 void TraverseList(LinkedList L) {
-	int node=0;
-	//第一步：判断链表是否存在
-	if(ExistLinkedList(L)==0)
-		return;
-	//第二步：遍历链表（不包括头结点）
-	L = L->next;
-	while(L!=NULL) {
-		printf("第%d个结点数据：%d\n",++node,L->data);
-		L = L->next;
-	}
+    int node=0;
+    //第一步：判断链表是否存在
+    if(ExistLinkedList(L)==0)
+        return;
+    //第二步：遍历链表（不包括头结点）
+    L = L->next;
+    while(L!=NULL) {
+        printf("第%d个结点数据：%d\n",++node,L->data);
+        L = L->next;
+    }
 }
 
 /**
@@ -153,23 +155,23 @@ void TraverseList(LinkedList L) {
  *  @notice      : None
  */
 Status SearchList(LinkedList L, ElemType e) {
-	int node=0;
-	//第一步：判断链表是否存在
-	if(ExistLinkedList(L)==0)
-		return;
-	//第二步：输入查找的数据
-	printf("输入查找的数据:\n");
-	scanf("%d",&e);
-	//第三步：删除
-	while(L->data!=e) {
-		L=L->next;
-		node++;
-		if(L==NULL) {
-			printf("找不到需要查找的结点\n");
-			return;
-		}
-	}
-	printf("第%d个结点数据：%d\n",node,L->data);
+    int node=0;
+    //第一步：判断链表是否存在
+    if(ExistLinkedList(L)==0)
+        return;
+    //第二步：输入查找的数据
+    printf("输入查找的数据:\n");
+    scanf("%d",&e);
+    //第三步：删除
+    while(L->data!=e) {
+        L=L->next;
+        node++;
+        if(L==NULL) {
+            printf("找不到需要查找的结点\n");
+            return;
+        }
+    }
+    printf("第%d个结点数据：%d\n",node,L->data);
 }
 
 /**
@@ -180,33 +182,33 @@ Status SearchList(LinkedList L, ElemType e) {
  *  @notice      : None
  */
 void *ReverseList(LinkedList L) {
-	LNode *mid,*back,*top,*head;
-	int node;
-	head=L;
-	//第一步：判断链表是否存在
-	if(ExistLinkedList(head)==0)
-		return head;
-	//第二步：反转
-	if (head->next==NULL||L->next==NULL) {
-		return head;
-	} else {
-		L=L->next;
-		back=NULL;
-		mid=L;
-		top=L->next;
-		while(1) {
-			mid->next=back;
-			if (top==NULL) {
-				break;
-			}
-			back=mid;
-			mid=top;
-			top=top->next;
-		}
-		head->next=mid;
-		TraverseList(head);
-		return head;
-	}
+    LNode *mid,*back,*top,*head;
+    int node;
+    head=L;
+    //第一步：判断链表是否存在
+    if(ExistLinkedList(head)==0)
+        return head;
+    //第二步：反转
+    if (head->next==NULL||L->next==NULL) {
+        return head;
+    } else {
+        L=L->next;
+        back=NULL;
+        mid=L;
+        top=L->next;
+        while(1) {
+            mid->next=back;
+            if (top==NULL) {
+                break;
+            }
+            back=mid;
+            mid=top;
+            top=top->next;
+        }
+        head->next=mid;
+        TraverseList(head);
+        return head;
+    }
 }
 
 /**
@@ -217,30 +219,30 @@ void *ReverseList(LinkedList L) {
  *  @notice      : None
  */
 Status IsLoopList(LinkedList L) {
-	LNode *fast,*slow,*temp;
-	int i;
-	fast=slow=L;
-	//第一步：判断链表是否存在
-	if(ExistLinkedList(L)==0)
-		return;
-	//第二步：让链表成环
-	while(fast->next!=NULL)
-		fast=fast->next;
-	temp=fast;
-	fast->next=L->next;
-	//第三步：判断
-	fast=L->next;
-	for(fast,slow; fast->next!=NULL; fast=fast->next->next,slow=slow->next)
-		if(fast==slow) {
-			printf("链表成环\n");
-			for(i=1; i<10; i++) {
-				printf("第%d个结点数据:%d\n",i,fast->data);
-				fast=fast->next;
-			}
-			temp->next=NULL;
-			return;
-		}
-	printf("链表不成环\n");
+    LNode *fast,*slow,*temp;
+    int i;
+    fast=slow=L;
+    //第一步：判断链表是否存在
+    if(ExistLinkedList(L)==0)
+        return;
+    //第二步：让链表成环
+    while(fast->next!=NULL)
+        fast=fast->next;
+    temp=fast;
+    fast->next=L->next;
+    //第三步：判断
+    fast=L->next;
+    for(fast,slow; fast->next!=NULL; fast=fast->next->next,slow=slow->next)
+        if(fast==slow) {
+            printf("链表成环\n");
+            for(i=1; i<10; i++) {
+                printf("第%d个结点数据:%d\n",i,fast->data);
+                fast=fast->next;
+            }
+            temp->next=NULL;
+            return;
+        }
+    printf("链表不成环\n");
 }
 
 /**
@@ -251,61 +253,61 @@ Status IsLoopList(LinkedList L) {
  *  @notice      : choose to finish
  */
 LNode *ReverseEvenList(LinkedList L) {
-	int node=0,i;
-	LNode *mid,*back,*top,*head,*temp;
-	head=L;
-	//第一步：判断链表是否存在
-	if(ExistLinkedList(L)==0)
-		return L;
-	//第二步：数结点
-	node=CountNode(L);
-	//第三步：根据结点奇偶分情况处理
-	L=L->next;
-	mid=back=top=L;
-	if(node==1) {
-		TraverseList(head);
-		return head;
-	}
-	temp=head->next->next;
-	if(node%2==0) {
-		for(i=node; i>0; i-=2) {
-			if(i>3) {
-				top=mid->next->next;
-				mid=mid->next;
-				back->next=top->next;
-				mid->next=back;
-				mid=back=top;
-			}
-			if(i==2) {
-				mid=mid->next;
-				back->next=NULL;
-				mid->next=back;
-				head->next=temp;
-				TraverseList(head);
-				return head;
-			}
-		}
-	} else {
-		for(i=node; i>0; i-=2) {
-			if(i==3) {
-				top=mid->next->next;
-				mid=mid->next;
-				back->next=top;
-				mid->next=back;
-				top->next=NULL;
-				head->next=temp;
-				TraverseList(head);
-				return head;
-			}
-			if(i>3) {
-				top=mid->next->next;
-				mid=mid->next;
-				back->next=top->next;
-				mid->next=back;
-				mid=back=top;
-			}
-		}
-	}
+    int node=0,i;
+    LNode *mid,*back,*top,*head,*temp;
+    head=L;
+    //第一步：判断链表是否存在
+    if(ExistLinkedList(L)==0)
+        return L;
+    //第二步：数结点
+    node=CountNode(L);
+    //第三步：根据结点奇偶分情况处理
+    L=L->next;
+    mid=back=top=L;
+    if(node==1) {
+        TraverseList(head);
+        return head;
+    }
+    temp=head->next->next;
+    if(node%2==0) {
+        for(i=node; i>0; i-=2) {
+            if(i>3) {
+                top=mid->next->next;
+                mid=mid->next;
+                back->next=top->next;
+                mid->next=back;
+                mid=back=top;
+            }
+            if(i==2) {
+                mid=mid->next;
+                back->next=NULL;
+                mid->next=back;
+                head->next=temp;
+                TraverseList(head);
+                return head;
+            }
+        }
+    } else {
+        for(i=node; i>0; i-=2) {
+            if(i==3) {
+                top=mid->next->next;
+                mid=mid->next;
+                back->next=top;
+                mid->next=back;
+                top->next=NULL;
+                head->next=temp;
+                TraverseList(head);
+                return head;
+            }
+            if(i>3) {
+                top=mid->next->next;
+                mid=mid->next;
+                back->next=top->next;
+                mid->next=back;
+                mid=back=top;
+            }
+        }
+    }
 }
 
 /**
@@ -316,25 +318,25 @@ LNode *ReverseEvenList(LinkedList L) {
  *  @notice      : choose to finish
  */
 LNode *FindMidNode(LinkedList L) {
-	int node=0,i;
-	LNode *p;
-	//第一步：判断链表是否存在
-	if(ExistLinkedList(L)==0)
-		return;
-	//第二步：数结点
-	p=L;
-	p=p->next;
-	node=CountNode(L);
-	//第三步输出中点位置
-	if(node%2==0) {
-		for(i=1; i<node/2; i++)
-			p=p->next;
-		printf("第%d个结点:%d\n第%d个结点:%d\n",node/2,p->data,node/2+1,p->next->data);
-	} else {
-		for(i=0; i<node/2; i++)
-			p=p->next;
-		printf("第%d个结点:%d\n",node/2+1,p->data);
-	}
+    int node=0,i;
+    LNode *p;
+    //第一步：判断链表是否存在
+    if(ExistLinkedList(L)==0)
+        return;
+    //第二步：数结点
+    p=L;
+    p=p->next;
+    node=CountNode(L);
+    //第三步输出中点位置
+    if(node%2==0) {
+        for(i=1; i<node/2; i++)
+            p=p->next;
+        printf("第%d个结点:%d\n第%d个结点:%d\n",node/2,p->data,node/2+1,p->next->data);
+    } else {
+        for(i=0; i<node/2; i++)
+            p=p->next;
+        printf("第%d个结点:%d\n",node/2+1,p->data);
+    }
 }
 
 /**
@@ -345,12 +347,12 @@ LNode *FindMidNode(LinkedList L) {
  *  @notice      : None
  */
 int CountNode(LNode *head) {
-	int node=0;
-	while(head->next!=NULL) {
-		node++;
-		head=head->next;
-	}
-	return node;
+    int node=0;
+    while(head->next!=NULL) {
+        node++;
+        head=head->next;
+    }
+    return node;
 }
 
 /**
@@ -361,14 +363,14 @@ int CountNode(LNode *head) {
  *  @notice      : None
  */
 LNode *ExistLinkedList(LNode *head) {
-	if(head==NULL) {
-		printf("链表不存在\n");
-		return 0;
-	}
-	if(head->next==NULL) {
-		printf("该链表只有头结点\n");
-		return 0;
-	}
+    if(head==NULL) {
+        printf("链表不存在\n");
+        return 0;
+    }
+    if(head->next==NULL) {
+        printf("该链表只有头结点\n");
+        return 0;
+    }
 }
 
 

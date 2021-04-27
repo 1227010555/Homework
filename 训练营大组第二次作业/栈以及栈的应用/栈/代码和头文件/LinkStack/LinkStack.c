@@ -4,7 +4,7 @@ void *initLStack(LinkStack *s) { //初始化栈
 	s=(LinkStack *)malloc (sizeof(StackNode));
 	s->top=NULL;
 	s->count=0;
-	printf("初始化成功\n"); 
+	printf("初始化栈成功\n"); 
 	return s;
 }
 
@@ -26,6 +26,7 @@ Status getTopLStack(LinkStack *s,ElemType *e) { //得到栈顶元素
 		return;
 	//第二步：输出栈顶元素
 	printf("当前栈顶数据为:%d\n",s->top->data);
+	return;
 }
 
 void *clearLStack(LinkStack *s) { //清空栈
@@ -39,6 +40,7 @@ void *clearLStack(LinkStack *s) { //清空栈
 		s->top=s->top->next;
 		free(stack);
 	}
+	printf("清空栈成功\n"); 
 	return s;
 }
 
@@ -59,6 +61,7 @@ void *destroyLStack(LinkStack *s) { //销毁栈
 	free(s->top);
 	s->top=NULL;
 	s=NULL;
+	printf("销毁栈成功\n"); 
 	return s;
 }
 
@@ -68,6 +71,7 @@ Status LStackLength(LinkStack *s,int *length) { //检测栈长度
 		return;
 	//第二步：检测栈长度
 	printf("栈长度为:%d\n",s->count);
+	return;
 }
 
 void *pushLStack(LinkStack *s,ElemType data) { //入栈
@@ -84,6 +88,7 @@ void *pushLStack(LinkStack *s,ElemType data) { //入栈
 	stack->next=s->top;
 	s->top=stack;
 	s->count++;
+	printf("入栈成功\n");
 	return s;
 }
 

@@ -3,7 +3,7 @@ void *initStack(SqStack *s,int sizes) { //初始化
 	s->elem = (ElemType *)malloc(sizes * sizeof(ElemType));
 	s->top  = 0;
 	s->size = sizes;
-	printf("初始化成功");
+	printf("初始化栈成功");
 	return s;
 }
 
@@ -25,6 +25,7 @@ Status getTopStack(SqStack *s,ElemType *e) { //得到栈顶元素
 		return;
 	//第二步：得到栈顶元素
 	printf("栈顶元素为:%d\n",s->elem[s->top]);
+	return;
 }
 
 void *clearStack(SqStack *s) { //清空栈
@@ -33,6 +34,7 @@ void *clearStack(SqStack *s) { //清空栈
 		return s;
 	//第二步：清空栈
 	s->top=0;
+	printf("清空栈成功\n"); 
 	return s;
 }
 
@@ -45,6 +47,7 @@ void *destroyStack(SqStack *s) { //销毁栈
 	//第二步：销毁栈
 	s->top=-1;
 	free(s->elem);
+	printf("销毁栈成功\n"); 
 	return s;
 }
 
@@ -56,6 +59,7 @@ Status stackLength(SqStack *s,int *length) { //检测栈长度
 	}
 	//第二步：检测栈长度
 	printf("栈长度:%d\n",s->top);
+	return;
 }
 
 void *pushStack(SqStack *s,ElemType data) { //入栈
@@ -69,6 +73,7 @@ void *pushStack(SqStack *s,ElemType data) { //入栈
 	scanf("%d",&data);
 	s->top++;
 	s->elem[s->top]=data;
+	printf("入栈成功\n");
 	return s;
 }
 

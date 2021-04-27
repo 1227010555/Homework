@@ -5,7 +5,7 @@ int main() {
 	LinkStack *head=NULL;
 	//用1使while死循环
 	while(1) {
-		printf("\n1.初始化栈\t\t2.判断栈是否存在或为空\n");
+		printf("1.初始化栈\t\t2.判断栈是否存在或为空\n");
 		printf("3.得到栈顶元素\t\t4.清空栈\n");
 		printf("5.销毁栈\t\t6.检测栈长度\n");
 		printf("7.入栈\t\t\t8.出栈\n");

@@ -82,6 +82,7 @@ void *InsertBeforeList_DuL(DuLNode *p, DuLNode *q) {
 	p->prior=q;
 	q->next=p;
 	TraverseList_DuL(head);
+	printf("插入成功\n");
 	return head;
 }
 
@@ -136,6 +137,7 @@ void *InsertAfterList_DuL(DuLNode *p, DuLNode *q) {
 		q->next=pNext;
 	}
 	TraverseList_DuL(head);
+	printf("插入成功\n");
 	return head;
 }
 
@@ -171,6 +173,7 @@ void *DeleteList_DuL(DuLNode *p, ElemType e) {
 		pNext->prior=p;
 	}
 	TraverseList_DuL(head);
+	printf("删除成功\n");
 	return head;
 }
 

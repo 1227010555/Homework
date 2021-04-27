@@ -42,7 +42,7 @@ typedef struct Aqueue {
 
 typedef enum {
     FALSE=0, TRUE=1
-} Status;
+} AQ_Status;
 
 /**************************************************************
  *    Prototype Declare Section

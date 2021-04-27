@@ -11,7 +11,7 @@ int main() {
 	float f;
 	//用1使while死循环
 	while(1) {
-		printf("\n1.初始化队列\t\t2.销毁队列\n");
+		printf("1.初始化队列\t\t2.销毁队列\n");
 		printf("3.检查队列是否为空\t4.查看队头元素\n");
 		printf("5.确定队列长度\t\t6.入队操作\n");
 		printf("7.出队操作\t\t8.清空队列\n");

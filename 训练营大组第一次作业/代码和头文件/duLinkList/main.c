@@ -5,7 +5,7 @@ int main() {
 	DuLNode *head=NULL;
 	//用1使while死循环
 	while(1) {
-		printf("\n1.初始化链表\t\t2.释放链表\n");
+		printf("1.初始化链表\t\t2.释放链表\n");
 		printf("3.在前面插入结点\t4.在后面插入结点\n");
 		printf("5.删除结点\t\t6.遍历链表\n");
 		printf("7.退出\n");

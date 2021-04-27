@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef enum Status 
+typedef enum SS_status 
 {
 	ERROR = 0, SUCCESS = 1
-} Status;
+} SS_status;
 
 typedef int ElemType;
 

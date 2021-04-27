@@ -4,9 +4,9 @@ clock_t start, stop;
 double useTime;
 
 int main() {
-    int choice=0,state=0,count=0,N=0,i=0;
+    int choice=0,state=0,count=0,N=0,i=0,digit=3;
     while(1) {
-    	//选择测试数据 
+        //选择测试数据
         while(state==0) {
             printf("1.输出10000个数字\t2.输出50000个数字\n");
             printf("3.输出200000个数字\t4.100个数组100个数\n");
@@ -51,14 +51,14 @@ int main() {
             system("cls");
             getchar();
         }
-        //创建测试数据文件 
+        //创建测试数据文件
         FILE *fp=fopen( "datafile.txt", "w" );
         for(i=0; i<count; i++)
             fprintf(fp,"%d\n",rand()%100+1);
         fclose(fp);
         int data[count];
         int *dataPoint=data;
-        //选择排序方法 
+        //选择排序方法
         while(state==1) {
             printf("1.插入排序\t2.归并排序\n");
             printf("3.快排递归版\t4.计数排序\n");
@@ -116,7 +116,7 @@ int main() {
                         fscanf(fi,"%d",&data[i]);
                     start=clock();
                     for(i=0; i<N; i++)
-                        RadixCountSort(dataPoint,count);
+                        RadixCountSort(dataPoint,count,digit);
                     stop=clock();
                     useTime=(double)(stop-start)/CLK_TCK;
                     printf("计数排序在%d个数组%d个数据所用时间%f\n",N,count,useTime);

@@ -9,7 +9,7 @@ int main() {
 	int *a=NULL;
 	//用1使while死循环
 	while(1) {
-		printf("\n1.初始化队列\t\t2.销毁队列\n");
+		printf("1.初始化队列\t\t2.销毁队列\n");
 		printf("3.检查队列是否已满\t4.检查队列是否为空\n");
 		printf("5.查看队头元素\t\t6.确定队列长度\n");
 		printf("7.入队操作\t\t8.出队操作\n");

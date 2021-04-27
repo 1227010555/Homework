@@ -115,17 +115,14 @@ int Partition(int *a, int begin, int end) {
 
 void CountSort(int *a, int size , int max) {
     int *c = (int *)malloc(sizeof(int) * (max + 1));
-    int b[200000];
+    int b[size];
     int i;
-    for(i = 0; i <= max; i++) {
+    for(i = 0; i <= max; i++)
         c[i] = 0;
-    }
-    for(i = 0; i < size; i++) {
+    for(i = 0; i < size; i++)
         c[*(a+i)]++;
-    }
-    for(i = 1; i <= max; i++) {
+    for(i = 1; i <= max; i++)
         c[i] = c[i] + c[i - 1];
-    }
     for(i = size - 1; i >= 0; i--) {
         b[c[*(a+i)] - 1] = *(a+i);
         c[*(a+i)]--;
@@ -137,46 +134,59 @@ void CountSort(int *a, int size , int max) {
     fclose(fp);
 }
 
-void RadixCountSort(int *a,int size) {
-    int i, j, k, l, digit;
-    int allot[10][size];
-    memset(allot, 0, sizeof(allot));
-    for(i = 1; i <= 3; i++) {
-        int flag = 0;
-        for(j = 0; j < size; j++) {
-            digit = GetDigit(*(a+j), i);
-            k = 0;
-            while(allot[digit][k])
-                k++;
-            allot[digit][k] = *(a+j);
-            if(digit)
-                flag = 1;
-        }
-        if(!flag)
-            break;
-        l = 0;
-        for(j = 0; j < 10; j++) {
-            k = 0;
-            while(allot[j][k] > 0) {
-                *(a+l++) = allot[j][k];
-                k++;
+void RadixCountSort(int *a,int size,int digit) {
+    int i=0,j=0;
+    int count[10];
+    int temp[size];
+    for(i=0; i<digit; i++) {
+        if(i==0) {
+            for(j=0; j<10; j++)
+                count[j]=0;
+            for(j=0; j<size; j++)
+                count[*(a+j)%(10)]++;
+            for(j=1; j<10; j++)
+                count[j]=count[j]+count[j-1];
+            for(j=size-1; j>=0; j--) {
+                temp[count[*(a+j)%10] - 1] = *(a+j);
+                count[*(a+j)%10]--;
+            }
+        } else if(i%2==0) {
+            for(j=0; j<10; j++)
+                count[j]=0;
+            for(j=0; j<size; j++)
+                count[((*(a+j))/(10*i))%10]++;
+            for(j=1; j<10; j++)
+                count[j]=count[j]+count[j-1];
+            for(j=size-1; j>=0; j--) {
+                temp[count[((*(a+j))/(10*i))%10] - 1] = *(a+j);
+                count[((*(a+j))/(10*i))%10]--;
+            }
+        } else if(i%2!=0) {
+            for(j=0; j<10; j++)
+                count[j]=0;
+            for(j=0; j<size; j++)
+                count[((*(temp+j))/(10*i))%10]++;
+            for(j=1; j<10; j++)
+                count[j]=count[j]+count[j-1];
+            for(j=size-1; j>=0; j--) {
+                a[count[((*(temp+j))/(10*i))%10] - 1] = *(temp+j);
+                count[((*(temp+j))/(10*i))%10]--;
             }
         }
-        memset(allot, 0, sizeof(allot));
     }
-    FILE *fp=fopen("CountSort.txt","a+" );
-    for(i =0; i < size; i++)
-        fprintf(fp,"%d\n",*(a+i));
-    fprintf(fp,"----------\n");
-    fclose(fp);
-}
-
-int GetDigit(int M, int i) {
-    while(i > 1) {
-        M /= 10;
-        i--;
+    if(digit%2==0) {
+        FILE *fp=fopen("CountSort.txt","a+" );
+        for(i =0; i < size; i++)
+            fprintf(fp,"%d\n",*(a+i));
+        fprintf(fp,"----------\n");
+        fclose(fp);
+    } else if(i%2!=0) {
+        FILE *fp=fopen("CountSort.txt","a+" );
+        for(i =0; i < size; i++)
+            fprintf(fp,"%d\n",*(temp+i));
+        fprintf(fp,"----------\n");
+        fclose(fp);
     }
-    return M % 10;
 }
 
 

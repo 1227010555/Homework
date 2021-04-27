@@ -21,6 +21,7 @@ void DestoryLQueue(LQueue *Q) {
 		Q->front=Q->front->next;
 	} while(Q->front==Q->rear);
 	Q->front=Q->rear=NULL;
+	printf("销毁队列成功\n"); 
 	return ;
 }
 
@@ -73,6 +74,7 @@ Status EnLQueue(LQueue *Q,void *data) {
 	Q->rear=p;
 	p->data = (void *)malloc(Q->length);
 	memcpy(p->data, data, Q->length);
+	printf("入队成功\n");
 	return TRUE;
 }
 
@@ -84,6 +86,7 @@ Status DeLQueue(LQueue *Q) {
 	Q->front=Q->front->next;
 	p->next=NULL;
 	free(p);
+	printf("出队成功\n");
 	return TRUE;
 }
 
@@ -92,6 +95,7 @@ void ClearLQueue(LQueue *Q) {
 		return ;
 	Q->rear=Q->front;
 	Q->front->next=NULL;
+	printf("清空队列成功\n"); 
 	return;
 }
 

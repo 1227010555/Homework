@@ -63,18 +63,12 @@ void CountSort(int *a, int size , int max);
 
 
 /**
- *  @name        : void RadixCountSort(int *a,int size)
+ *  @name        : void RadixCountSort(int *a,int size,int digit)
  *  @description : 基数计数排序
  *  @param       : 数组指针a，数组长度size
  */
-void RadixCountSort(int *a,int size);
+void RadixCountSort(int *a,int size,int digit);
 
-/**
- *  @name        : int GetDigit(int M, int i)
- *  @description : 获取位数 
- *  @param       : 数字M，位数i 
- */
-int GetDigit(int M, int i);
 
  
 #endif // QUEUE_H_INCLUDED
