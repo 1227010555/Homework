@@ -49,7 +49,9 @@ public class OtherCity extends AppCompatActivity implements View.OnTouchListener
     private TextView winText;
     private TextView maxText;
     private TextView minText;
+    private ImageView page;
     String weatherUrl = "https://www.tianqiapi.com/free/day?appid=17657664&appsecret=2B0832mZ&city=";
+    String JSON = null;
     String cityName = null;
 
     @Override
@@ -72,6 +74,9 @@ public class OtherCity extends AppCompatActivity implements View.OnTouchListener
         winText = (TextView) findViewById(R.id.win_text);
         maxText = (TextView) findViewById(R.id.max_text);
         minText = (TextView) findViewById(R.id.min_text);
+        page=(ImageView) findViewById(R.id.page);
+
+        page.setImageResource(R.drawable.right);
 
         //搜索城市
         titleSearch.setOnClickListener(v -> {
@@ -80,10 +85,10 @@ public class OtherCity extends AppCompatActivity implements View.OnTouchListener
         });
 
         //读取城市天气
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        cityName = prefs.getString("weather_other", null);
-        if (cityName != null) {
-            sendHTTPRequest(weatherUrl + cityName);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(OtherCity.this);
+        JSON = prefs.getString("weather_JSON_other", null);
+        if (JSON != null) {
+            receiveJSON(JSON);
         } else {
             weatherLayout.setVisibility(View.INVISIBLE);
             sendHTTPRequest(weatherUrl);
@@ -211,12 +216,13 @@ public class OtherCity extends AppCompatActivity implements View.OnTouchListener
     //接受JSON数据
     public void receiveJSON(String JSON) {
         runOnUiThread(() -> {
-            City cityweather = handleCityResponse(JSON);
-            if (cityweather != null) {
+            City cityInfo = handleCityResponse(JSON);
+            if (cityInfo != null) {
                 SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(OtherCity.this).edit();
-                editor.putString("weather_other", cityweather.getCityName());
+                editor.putString("weather_JSON_other", JSON);
+                editor.putString("weather_cityname_other", cityInfo.getCityName());
                 editor.apply();
-                showWeatherInfo(cityweather);
+                showWeatherInfo(cityInfo);
             } else {
                 Toast.makeText(OtherCity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
             }
@@ -252,9 +258,9 @@ public class OtherCity extends AppCompatActivity implements View.OnTouchListener
     @SuppressLint("ClickableViewAccessibility")
     private void findView() {
         weatherLayout = (ScrollView) findViewById(R.id.weather_layout);
-        weatherLayout.setOnTouchListener(this);
+        weatherLayout.setOnTouchListener(OtherCity.this);
         weatherLayout.setLongClickable(true);
-        mGestureDetector = new GestureDetector(this, this);
+        mGestureDetector = new GestureDetector(OtherCity.this, OtherCity.this);
     }
 
     @Override
@@ -286,16 +292,16 @@ public class OtherCity extends AppCompatActivity implements View.OnTouchListener
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         final int FLING_MIN_X_DISTANCE = 100;
         final int FLING_MIN_Y_DISTANCE = 10;
-        final int FLING_MIN_VELOCITY = 200;
-        if (((int) (e2.getX() - e1.getX())) > FLING_MIN_X_DISTANCE && Math.abs(velocityX) > FLING_MIN_VELOCITY) { //左滑右滑皆可
-            Intent intent = new Intent(this, MainActivity.class);
+        if (((int) (e2.getX() - e1.getX())) > FLING_MIN_X_DISTANCE) { //左滑右滑皆可
+            Intent intent = new Intent(OtherCity.this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             finish();
         } else if
-        (((int) (e2.getY() - e1.getY())) > FLING_MIN_Y_DISTANCE && Math.abs(velocityX) > FLING_MIN_VELOCITY) {
+        (((int) (e2.getY() - e1.getY())) > FLING_MIN_Y_DISTANCE && ((int) (e2.getX() - e1.getX())) < FLING_MIN_X_DISTANCE) {
             weatherLayout.setVisibility(View.INVISIBLE);
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            cityName = prefs.getString("weather_other", null);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(OtherCity.this);
+            cityName = prefs.getString("weather_cityname_other", null);
             sendHTTPRequest(weatherUrl + cityName);
             Toast.makeText(OtherCity.this, "刷新成功", Toast.LENGTH_SHORT).show();
         }
@@ -321,16 +327,16 @@ public class OtherCity extends AppCompatActivity implements View.OnTouchListener
             AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
             int anHour = 60 * 60 * 1000;
             long triggerAtTime = SystemClock.elapsedRealtime() + anHour;
-            Intent i = new Intent(this, AutoUpdateService.class);
-            PendingIntent pendingIntent = PendingIntent.getService(this, 0, i, 0);
+            Intent i = new Intent(OtherCity.this, AutoUpdateService.class);
+            PendingIntent pendingIntent = PendingIntent.getService(OtherCity.this, 0, i, 0);
             manager.cancel(pendingIntent);
             manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pendingIntent);
             return super.onStartCommand(intent, flags, startId);
         }
 
         private void updateWeather() {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-            cityName = preferences.getString("weather_other", null);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(OtherCity.this);
+            cityName = preferences.getString("weather_cityname_other", null);
             if (cityName != null) {
                 weatherLayout.setVisibility(View.INVISIBLE);
                 sendHTTPRequest(weatherUrl + cityName);
