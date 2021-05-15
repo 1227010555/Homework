@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_history"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_grey">
+
+    <TextView
+        android:id="@+id/history"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/light_grey"
+        android:gravity="center"
+        android:text="历史"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/history_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_toStartOf="@id/history_delete"
+        android:layout_toLeftOf="@id/history_delete"
+        android:layout_toEndOf="@+id/history"
+        android:layout_toRightOf="@+id/history" />
+
+    <ImageButton
+        android:id="@+id/history_delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:background="@drawable/delete" />
+
+
+</RelativeLayout>
+

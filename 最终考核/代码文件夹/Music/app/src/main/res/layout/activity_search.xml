@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey">
+
+    <include
+        android:id="@+id/search_title"
+        layout="@layout/search_title" />
+
+    <include
+        android:id="@+id/search_history"
+        layout="@layout/search_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_title" />
+
+    <include
+        android:id="@+id/search_hot"
+        layout="@layout/search_hot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_history" />
+
+    <fragment
+        android:id="@+id/play_fragment"
+        android:name="com.example.music.fragment.PlayList"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
+

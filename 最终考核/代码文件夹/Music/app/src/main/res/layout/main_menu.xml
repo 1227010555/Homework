@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey">
+
+    <ImageView
+        android:id="@+id/user_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/light_grey"
+        android:src="@drawable/user" />
+
+    <Button
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@+id/user_img"
+        android:background="@color/light_grey"
+        android:text="立即登录 >" />
+
+    <Button
+        android:id="@+id/exit_login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/close_app"
+        android:background="@color/light_grey"
+        android:text="退出登录"
+        android:textColor="@color/red" />
+
+    <Button
+        android:id="@+id/close_app"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/light_grey"
+        android:text="关闭应用"
+        android:textColor="@color/red" />
+
+</RelativeLayout>
